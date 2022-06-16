@@ -11,3 +11,5 @@
 // Add manually edited resources here...
 
 /////////////////////////////////////////////////////////////////////////////
+
+CREATEPROCESS_MANIFEST_RESOURCE_ID RT_MANIFEST "wordpad.manifest"
