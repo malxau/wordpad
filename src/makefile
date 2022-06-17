@@ -1,54 +1,34 @@
-NULL=
-CPP=cl.exe
-RSC=rc.exe
-
 OUTDIR=Release
 INTDIR=Release
+USE_DLL=0
+
+CPP=cl.exe
+RSC=rc.exe
 
 ALL : "$(OUTDIR)\wordpad.exe"
 
 
 CLEAN :
-	-@erase "$(INTDIR)\buttondi.obj"
-	-@erase "$(INTDIR)\chicdial.obj"
-	-@erase "$(INTDIR)\cntritem.obj"
-	-@erase "$(INTDIR)\colorlis.obj"
-	-@erase "$(INTDIR)\datedial.obj"
-	-@erase "$(INTDIR)\ddxm.obj"
-	-@erase "$(INTDIR)\docopt.obj"
-	-@erase "$(INTDIR)\doctype.obj"
-	-@erase "$(INTDIR)\filenewd.obj"
-	-@erase "$(INTDIR)\formatba.obj"
-	-@erase "$(INTDIR)\formatpa.obj"
-	-@erase "$(INTDIR)\formatta.obj"
-	-@erase "$(INTDIR)\ipframe.obj"
-	-@erase "$(INTDIR)\key.obj"
-	-@erase "$(INTDIR)\listdlg.obj"
-	-@erase "$(INTDIR)\mainfrm.obj"
-	-@erase "$(INTDIR)\multconv.obj"
-	-@erase "$(INTDIR)\options.obj"
-	-@erase "$(INTDIR)\optionsh.obj"
-	-@erase "$(INTDIR)\pageset.obj"
-	-@erase "$(INTDIR)\ruler.obj"
-	-@erase "$(INTDIR)\splash.obj"
-	-@erase "$(INTDIR)\srvritem.obj"
-	-@erase "$(INTDIR)\stdafx.obj"
-	-@erase "$(INTDIR)\strings.obj"
-	-@erase "$(INTDIR)\unitspag.obj"
-	-@erase "$(INTDIR)\wordpad.obj"
-	-@erase "$(INTDIR)\wordpad.res"
-	-@erase "$(INTDIR)\wordpdoc.obj"
-	-@erase "$(INTDIR)\wordpvw.obj"
-	-@erase "$(OUTDIR)\wordpad.exe"
+	-@if exist "$(INTDIR)" rmdir /s /q "$(INTDIR)"
+	-@if exist "$(OUTDIR)" rmdir /s /q "$(OUTDIR)"
 
 "$(OUTDIR)" :
-    @if not exist "$(OUTDIR)/$(NULL)" mkdir "$(OUTDIR)"
+    @if not exist "$(OUTDIR)" mkdir "$(OUTDIR)"
+
 
 CPP_MAKE_PCH=/Yc"stdafx.h"
 CPP_USE_PCH=/Yu"stdafx.h"
 
-CPP_PROJ=/Zc:wchar_t /nologo /MD /W3 /EHsc /Os /Z7 /D "NDEBUG" /D "WIN32" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /D "_UNICODE" /D WINVER=0x500 /Fp"$(INTDIR)\wordpad.pch" /Fo"$(INTDIR)\\" /c 
-RSC_PROJ=/nologo /l 0x409 /fo"$(INTDIR)\wordpad.res" /d "NDEBUG" /d "_AFXDLL" 
+!IF $(USE_DLL)==1
+CPP_RUNTIME=/MD /D "_AFXDLL"
+RSC_RUNTIME=/d "_AFXDLL"
+!ELSE
+CPP_RUNTIME=/MT
+RSC_RUNTIME=
+!ENDIF
+
+CPP_PROJ=/Zc:wchar_t /nologo /W3 /EHsc /Os /Z7 $(CPP_RUNTIME) /D "NDEBUG" /D "WIN32" /D "_WINDOWS" /D "_MBCS" /D "_UNICODE" /D WINVER=0x500 /Fp"$(INTDIR)\wordpad.pch" /Fo"$(INTDIR)\\" /c 
+RSC_PROJ=/nologo /l 0x409 /fo"$(INTDIR)\wordpad.res" /d "NDEBUG" $(RSC_RUNTIME)
 
 LINK32=link.exe
 LINK32_FLAGS=/nologo /entry:"wWinMainCRTStartup" /subsystem:windows /incremental:no /debug /pdb:"$(OUTDIR)\wordpad.pdb" /machine:I386 /out:"$(OUTDIR)\wordpad.exe" 
