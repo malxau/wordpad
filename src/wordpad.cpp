@@ -198,7 +198,7 @@ BOOL CWordPadApp::InitInstance()
 	RegisterFormats();
 
 	// Initialize RichEdit control
-	if (!AfxInitRichEdit())
+	if (!AfxInitRichEdit2())
 	{
 		AfxMessageBox(IDS_RICHED_LOAD_FAIL, MB_OK|MB_ICONEXCLAMATION);
 		return FALSE;
