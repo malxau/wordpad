@@ -1,6 +1,6 @@
 //{{NO_DEPENDENCIES}}
-// Microsoft Developer Studio generated include file.
-// Used by WordPad.rc
+// Microsoft Visual C++ generated include file.
+// Used by wordpad.rc
 //
 #define IDR_SRVR_INPLACE                4
 #define IDR_SRVR_EMBEDDED               5
@@ -94,6 +94,7 @@
 #define IDD_OPTIONS_MARGINS             160
 #define IDD_FILENEWDIALOG               160
 #define IDS_DT13                        161
+#define IDD_ABOUT                       161
 #define IDB_BITMAP48                    162
 #define IDB_BITMAP_PRINTER              163
 #define IDS_FINISHED_SEARCH             164
@@ -108,6 +109,7 @@
 #define IDS_INCH2_ABBREV                170
 #define IDS_INCH3_ABBREV                171
 #define IDS_INCH4_ABBREV                172
+#define IDR_LICENSE_TEXT                172
 #define IDS_CM_ABBREV                   173
 #define IDS_POINT_ABBREV                174
 #define IDS_PICA_ABBREV                 175
@@ -167,6 +169,7 @@
 #define IDC_EDIT_AFTER                  1036
 #define IDC_SPIN_BEFORE                 1038
 #define IDC_SPIN_AFTER                  1039
+#define IDC_LICENSE_TEXT                1041
 #define ID_CANCEL_EDIT_CNTR             32768
 #define ID_CANCEL_EDIT_SRVR             32769
 #define ID_PAGE_SETUP                   32771
@@ -215,9 +218,9 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        172
+#define _APS_NEXT_RESOURCE_VALUE        173
 #define _APS_NEXT_COMMAND_VALUE         32816
-#define _APS_NEXT_CONTROL_VALUE         1040
-#define _APS_NEXT_SYMED_VALUE           103
+#define _APS_NEXT_CONTROL_VALUE         1043
+#define _APS_NEXT_SYMED_VALUE           105
 #endif
 #endif

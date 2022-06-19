@@ -28,12 +28,14 @@ RSC_RUNTIME=
 !ENDIF
 
 CPP_PROJ=/Zc:wchar_t /nologo /W3 /EHsc /Os /Z7 $(CPP_RUNTIME) /D "NDEBUG" /D "WIN32" /D "_WINDOWS" /D "_MBCS" /D "_UNICODE" /D WINVER=0x500 /Fp"$(INTDIR)\wordpad.pch" /Fo"$(INTDIR)\\" /c 
-RSC_PROJ=/nologo /l 0x409 /fo"$(INTDIR)\wordpad.res" /d "NDEBUG" $(RSC_RUNTIME)
+RSC_PROJ=/l 0x409 /fo"$(INTDIR)\wordpad.res" /d "NDEBUG" $(RSC_RUNTIME)
 
 LINK32=link.exe
 LINK32_FLAGS=/nologo /entry:"wWinMainCRTStartup" /subsystem:windows /incremental:no /debug /pdb:"$(OUTDIR)\wordpad.pdb" /machine:I386 /out:"$(OUTDIR)\wordpad.exe" 
 LINK32_OBJS= \
 	"$(INTDIR)\stdafx.obj" \
+	"$(INTDIR)\about.obj" \
+	"$(INTDIR)\bigicon.obj" \
 	"$(INTDIR)\buttondi.obj" \
 	"$(INTDIR)\chicdial.obj" \
 	"$(INTDIR)\cntritem.obj" \

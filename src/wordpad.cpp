@@ -495,16 +495,14 @@ void CWordPadApp::PrintTwips(TCHAR* buf, int nSize, int nValue, int nDec)
 
 void CWordPadApp::OnAppAbout()
 {
-	CString strTitle;
-	VERIFY(strTitle.LoadString(AFX_IDS_APP_TITLE));
-	ShellAbout(m_pMainWnd->GetSafeHwnd(), strTitle, _T(""), LoadIcon(IDR_MAINFRAME));
+	CAboutDialog dlg;
+	dlg.DoModal();
 }
 
 int CWordPadApp::ExitInstance()
 {
 	m_pszHelpFilePath = NULL;
 
-	FreeLibrary(GetModuleHandle(_T("RICHED32.DLL")));
 	SaveOptions();
 
 	return CWinApp::ExitInstance();

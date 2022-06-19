@@ -544,20 +544,15 @@ BEGIN
     CONTROL         "",IDC_BIGICON,"Button",BS_OWNERDRAW | WS_DISABLED,6,6,
                     38,40
     LTEXT           "WordPad Version 1.0",IDC_STATIC,60,6,164,8,NOT WS_GROUP
-    LTEXT           "Microsoft Foundation Classes version 10.0",IDC_STATIC,60,
-                    15,164,8,NOT WS_GROUP
     CONTROL         "",IDC_STATIC,"Static",SS_BLACKRECT,60,30,188,1
     LTEXT           "Warning: This computer program is protected by",
                     IDC_STATIC,60,36,188,8
+    LTEXT           "copyright law and international treaties.",IDC_STATIC,
+                    60,44,188,8
     LTEXT           "© 1998 - 2008 Microsoft Corporation.  All rights reserved.",
-                    IDC_STATIC,60,44,188,8
-    LTEXT           "reproduction or distribution of this program, or any",
-                    IDC_STATIC,60,52,188,8
-    LTEXT           "portion of it, may result in severe civil and criminal",
                     IDC_STATIC,60,60,188,8
-    LTEXT           "penalties, and will be prosecuted to the maximum",
+    LTEXT           "Licensed under the terms of the MIT license.",
                     IDC_STATIC,60,68,188,8
-    LTEXT           "extent possible under law.",IDC_STATIC,60,76,188,8
 END
 
 IDD_OPTIONS_UNITS DIALOG  0, 0, 280, 86
@@ -614,6 +609,21 @@ BEGIN
     PUSHBUTTON      "Cancel",IDCANCEL,127,34,50,14
 END
 
+IDD_ABOUT DIALOGEX 0, 0, 422, 250
+STYLE DS_SETFONT | DS_MODALFRAME | WS_CAPTION | WS_SYSMENU
+CAPTION "About WordPad"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    CONTROL         "",IDC_BIGICON,"Button",BS_OWNERDRAW | WS_DISABLED,6,6,
+                    38,40
+    LTEXT           "WordPad Version 1.0",-1,60,6,164,8,NOT WS_GROUP
+    LTEXT           "https://github.com/malxau/wordpad",-1,60,18,188,8
+    EDITTEXT        IDC_LICENSE_TEXT,60,33,350,206,ES_MULTILINE | 
+                    ES_AUTOHSCROLL | ES_NOHIDESEL | ES_READONLY | WS_VSCROLL | 
+                    NOT WS_TABSTOP
+    DEFPUSHBUTTON   "&Close",IDOK,332,7,78,18
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -641,7 +651,7 @@ BEGIN
             VALUE "FileDescription", "WordPad MFC Application"
             VALUE "FileVersion", "1.0"
             VALUE "InternalName", "wordpad"
-            VALUE "LegalCopyright", L"\251 Microsoft Corporation.  All rights reserved."
+            VALUE "LegalCopyright", "© Microsoft Corporation.  All rights reserved."
             VALUE "OriginalFilename", "WORDPAD.EXE"
             VALUE "ProductName", "Microsoft® Windows (TM) Operating System"
             VALUE "ProductVersion", "5.0"
@@ -699,6 +709,12 @@ BEGIN
     IDD_FORMAT_PARA, DIALOG
     BEGIN
         BOTTOMMARGIN, 145
+    END
+
+    IDD_ABOUT, DIALOG
+    BEGIN
+        RIGHTMARGIN, 410
+        BOTTOMMARGIN, 239
     END
 END
 #endif    // APSTUDIO_INVOKED

@@ -14,7 +14,9 @@
 #endif
 
 #include "resource.h"       // main symbols
+#include "bigicon.h"
 #include "splash.h"
+#include "about.h"
 #include "options.h"
 #include "afxtempl.h"
 

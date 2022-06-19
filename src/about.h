@@ -1,4 +1,4 @@
-// splash.h : header file
+// about.h : header file
 //
 // This is a part of the Microsoft Foundation Classes C++ library.
 // Copyright (c) Microsoft Corporation.  All rights reserved.
@@ -10,24 +10,24 @@
 // Microsoft Foundation Classes product.
 
 /////////////////////////////////////////////////////////////////////////////
-// CSplash dialog
+// CAbout dialog
 
 #pragma warning(push)
 // Disable warning on Create.
 #pragma warning(disable : 4264)
 #pragma warning(disable : 4263)
-class CSplashWnd : public CDialog
+class CAboutDialog : public CDialog
 {
 private:
 	using CDialog::Create;
 
 // Construction
 public:
-	BOOL Create(CWnd* pParent = NULL);
+	CAboutDialog(CWnd* pParent = NULL);   // standard constructor
 
 // Dialog Data
-	//{{AFX_DATA(CSplashWnd)
-	enum { IDD = IDD_SPLASH };
+	//{{AFX_DATA(CAboutDialog)
+	enum { IDD = IDD_ABOUT };
 		// NOTE: the ClassWizard will add data members here
 	//}}AFX_DATA
 
@@ -36,8 +36,9 @@ protected:
 	CBigIcon m_icon; // self-draw button
 
 	// Generated message map functions
-	//{{AFX_MSG(CSplashWnd)
+	//{{AFX_MSG(CAboutDialog)
 	virtual BOOL OnInitDialog();
+	afx_msg UINT OnGetDlgCode();
 	//}}AFX_MSG
 };
 #pragma warning(pop)
