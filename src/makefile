@@ -4,9 +4,41 @@ USE_DLL=0
 
 CPP=cl.exe
 RSC=rc.exe
+LINK32=link.exe
+
+CXX_MAKE_PCH=/Yc"stdafx.h"
+CXX_USE_PCH=/Yu"stdafx.h"
+
+!IF $(USE_DLL)==1
+CXX_RUNTIME=/MD /D "_AFXDLL"
+RC_RUNTIME=/d "_AFXDLL"
+!ELSE
+CXX_RUNTIME=/MT
+RC_RUNTIME=
+!ENDIF
+
+CXXFLAGS=/Zc:wchar_t /nologo /W3 /EHsc /Os /Z7 $(CXX_RUNTIME) /D "NDEBUG" /D "WIN32" /D "_WINDOWS" /D "_MBCS" /D "_UNICODE" /D WINVER=0x500 /Fp"$(INTDIR)\wordpad.pch" /Fo"$(INTDIR)\\" /c 
+RCFLAGS=/l 0x409 /fo"$(INTDIR)\wordpad.res" /d "NDEBUG" $(RC_RUNTIME)
+
+LDFLAGS=/nologo /entry:"wWinMainCRTStartup" /subsystem:windows /incremental:no /debug /pdb:"$(OUTDIR)\wordpad.pdb" /out:"$(OUTDIR)\wordpad.exe" 
+
+!IF [$(CC) 2>&1 | find "x86" >NUL]==0
+LDFLAGS=$(LDFLAGS) -MACHINE:X86
+!ELSE
+!IF [$(CC) 2>&1 | find "x64" >NUL]==0
+LDFLAGS=$(LDFLAGS) -MACHINE:X64
+!ELSE
+!IF [$(CC) 2>&1 | find "AMD64" >NUL]==0
+LDFLAGS=$(LDFLAGS) -MACHINE:AMD64
+!ELSE
+!IF [$(CC) 2>&1 | find "ARM64" >NUL]==0
+LDFLAGS=$(LDFLAGS) -MACHINE:ARM64
+!ENDIF # ARM64
+!ENDIF # AMD64
+!ENDIF # X64
+!ENDIF # X86
 
 ALL : "$(OUTDIR)\wordpad.exe"
-
 
 CLEAN :
 	-@if exist "$(INTDIR)" rmdir /s /q "$(INTDIR)"
@@ -15,23 +47,6 @@ CLEAN :
 "$(OUTDIR)" :
     @if not exist "$(OUTDIR)" mkdir "$(OUTDIR)"
 
-
-CPP_MAKE_PCH=/Yc"stdafx.h"
-CPP_USE_PCH=/Yu"stdafx.h"
-
-!IF $(USE_DLL)==1
-CPP_RUNTIME=/MD /D "_AFXDLL"
-RSC_RUNTIME=/d "_AFXDLL"
-!ELSE
-CPP_RUNTIME=/MT
-RSC_RUNTIME=
-!ENDIF
-
-CPP_PROJ=/Zc:wchar_t /nologo /W3 /EHsc /Os /Z7 $(CPP_RUNTIME) /D "NDEBUG" /D "WIN32" /D "_WINDOWS" /D "_MBCS" /D "_UNICODE" /D WINVER=0x500 /Fp"$(INTDIR)\wordpad.pch" /Fo"$(INTDIR)\\" /c 
-RSC_PROJ=/l 0x409 /fo"$(INTDIR)\wordpad.res" /d "NDEBUG" $(RSC_RUNTIME)
-
-LINK32=link.exe
-LINK32_FLAGS=/nologo /entry:"wWinMainCRTStartup" /subsystem:windows /incremental:no /debug /pdb:"$(OUTDIR)\wordpad.pdb" /machine:I386 /out:"$(OUTDIR)\wordpad.exe" 
 LINK32_OBJS= \
 	"$(INTDIR)\stdafx.obj" \
 	"$(INTDIR)\about.obj" \
@@ -68,22 +83,22 @@ LINK32_OBJS= \
 
 "$(OUTDIR)\wordpad.exe" : "$(OUTDIR)" $(DEF_FILE) $(LINK32_OBJS)
 	@echo $@
-    @$(LINK32) $(LINK32_FLAGS) $(LINK32_OBJS) 
+    @$(LINK32) $(LDFLAGS) $(LINK32_OBJS) 
 
 $(INTDIR)\stdafx.obj: stdafx.h stdafx.cpp
-    @$(CPP) $(CPP_PROJ) $(CPP_MAKE_PCH) stdafx.cpp
+    @$(CPP) $(CXXFLAGS) $(CXX_MAKE_PCH) stdafx.cpp
 
 # YMAKE needs to build stdafx.obj first so the precompiled header exists,
 # then use it.  NMAKE processes things in order one at a time, so this is
 # achieved by having stdafx.obj listed as the first object.
 !IFDEF _YMAKE_VER
 .cpp{$(INTDIR)}.obj: "$(INTDIR)\stdafx.obj"
-    @$(CPP) $(CPP_PROJ) $(CPP_USE_PCH) $< 
+    @$(CPP) $(CXXFLAGS) $(CXX_USE_PCH) $< 
 !ELSE
 .cpp{$(INTDIR)}.obj:
-    @$(CPP) $(CPP_PROJ) $(CPP_USE_PCH) $< 
+    @$(CPP) $(CXXFLAGS) $(CXX_USE_PCH) $< 
 !ENDIF
 
 .rc{$(INTDIR)}.res:
-    @$(RC) $(RSC_PROJ) $< 
+    @$(RC) $(RCFLAGS) $< 
 
