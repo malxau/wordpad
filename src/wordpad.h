@@ -109,7 +109,6 @@ public:
 	virtual BOOL InitInstance();
 	virtual int ExitInstance();
 	virtual BOOL OnDDECommand(LPTSTR lpszCommand);
-	virtual void WinHelp(DWORD dwData, UINT nCmd = HELP_CONTEXT);
 	virtual BOOL PreTranslateMessage(MSG* pMsg);
 	//}}AFX_VIRTUAL
 

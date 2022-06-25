@@ -22,14 +22,9 @@ public:
 
 // Implementation
 protected:
-	virtual const DWORD* GetHelpIDs() = 0;
-
 	// Generated message map functions
 	//{{AFX_MSG(CCSDialog)
-	virtual BOOL OnInitDialog();
 	//}}AFX_MSG
-	afx_msg LONG_PTR OnHelp(UINT_PTR wParam, LONG_PTR lParam);
-	afx_msg LONG_PTR OnHelpContextMenu(UINT_PTR wParam, LONG_PTR lParam);
 	DECLARE_MESSAGE_MAP()
 };
 
@@ -42,13 +37,9 @@ public:
 
 // Implementation
 protected:
-	virtual const DWORD* GetHelpIDs() = 0;
-
 	// Generated message map functions
 	//{{AFX_MSG(CCSPropertyPage)
 	//}}AFX_MSG
-	afx_msg LONG_PTR OnHelp(UINT_PTR wParam, LONG_PTR lParam);
-	afx_msg LONG_PTR OnHelpContextMenu(UINT_PTR wParam, LONG_PTR lParam);
 	DECLARE_MESSAGE_MAP()
 };
 
@@ -62,11 +53,8 @@ public:
 		UINT iSelectPage = 0);
 // Implementation
 protected:
-	virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
 	// Generated message map functions
 	//{{AFX_MSG(CCSPropertySheet)
 	//}}AFX_MSG
-	afx_msg LONG_PTR OnHelp(UINT_PTR wParam, LONG_PTR lParam);
-	afx_msg LONG_PTR OnHelpContextMenu(UINT_PTR wParam, LONG_PTR lParam);
 	DECLARE_MESSAGE_MAP()
 };

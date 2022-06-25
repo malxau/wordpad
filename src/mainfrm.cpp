@@ -34,7 +34,6 @@ BEGIN_MESSAGE_MAP(CMainFrame, CFrameWnd)
 	ON_WM_SYSCOLORCHANGE()
 	ON_WM_SIZE()
 	ON_WM_MOVE()
-	ON_COMMAND(ID_HELP, OnHelpFinder)
 	ON_WM_DROPFILES()
 	ON_COMMAND(ID_CHAR_COLOR, OnCharColor)
 	ON_COMMAND(ID_PEN_TOGGLE, OnPenToggle)
@@ -42,11 +41,8 @@ BEGIN_MESSAGE_MAP(CMainFrame, CFrameWnd)
 	ON_WM_QUERYNEWPALETTE()
 	ON_WM_PALETTECHANGED()
 	ON_WM_DEVMODECHANGE()
-	ON_COMMAND(ID_HELP_INDEX, OnHelpFinder)
 	//}}AFX_MSG_MAP
 	// Global help commands
-//  ON_COMMAND(ID_CONTEXT_HELP, CFrameWnd::OnContextHelp)
-	ON_COMMAND(ID_DEFAULT_HELP, OnHelpFinder)
 	ON_UPDATE_COMMAND_UI(ID_VIEW_FORMATBAR, OnUpdateControlBarMenu)
 	ON_UPDATE_COMMAND_UI(ID_VIEW_RULER, OnUpdateControlBarMenu)
 	ON_MESSAGE(WPM_BARSTATE, OnBarState)
@@ -404,11 +400,6 @@ LONG_PTR CMainFrame::OnOpenMsg(UINT_PTR, LONG_PTR lParam)
 			return TRUE;
 	}
 	return FALSE;
-}
-
-void CMainFrame::OnHelpFinder()
-{
-	theApp.WinHelp(0, HELP_FINDER);
 }
 
 void CMainFrame::OnDropFiles(HDROP hDropInfo)

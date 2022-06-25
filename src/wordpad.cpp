@@ -553,7 +553,6 @@ BOOL CWordPadApp::PromptForFileName(CString& fileName, UINT nIDSTitle,
 	VERIFY(title.LoadString(nIDSTitle));
 
 	dlgFile.m_ofn.Flags |= dwFlags;
-//  dlgFile.m_ofn.Flags &= ~OFN_SHOWHELP;
 
 	int nIndex = m_nFilterIndex;
 	if (!bOpenFileDialog)
@@ -841,13 +840,6 @@ BOOL RegisterHelper(LPCTSTR* rglpszRegister, LPCTSTR* rglpszSymbols,
 	}
 
 	return bResult;
-}
-
-void CWordPadApp::WinHelp(DWORD dwData, UINT nCmd)
-{
-	if (nCmd == HELP_INDEX)
-		nCmd = HELP_FINDER;
-	CWinApp::WinHelp(dwData, nCmd);
 }
 
 BOOL CWordPadApp::PreTranslateMessage(MSG* pMsg)

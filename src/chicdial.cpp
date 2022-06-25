@@ -36,35 +36,8 @@ CCSDialog::CCSDialog() : CDialog()
 BEGIN_MESSAGE_MAP(CCSDialog, CDialog)
 	//{{AFX_MSG_MAP(CCSDialog)
 	//}}AFX_MSG_MAP
-	ON_MESSAGE(WM_HELP, OnHelp)
-	ON_MESSAGE(WM_CONTEXTMENU, OnHelpContextMenu)
 END_MESSAGE_MAP()
 
-
-/////////////////////////////////////////////////////////////////////////////
-// CCSDialog message handlers
-
-LONG_PTR CCSDialog::OnHelp(UINT_PTR, LONG_PTR lParam)
-{
-	::WinHelp( (HWND)((LPHELPINFO)lParam)->hItemHandle, AfxGetApp()->m_pszHelpFilePath,
-		HELP_WM_HELP, (ULONG_PTR)GetHelpIDs());
-	return 0;
-}
-
-LONG_PTR CCSDialog::OnHelpContextMenu(UINT_PTR wParam, LONG_PTR)
-{
-	::WinHelp((HWND)wParam, AfxGetApp()->m_pszHelpFilePath,
-		HELP_CONTEXTMENU, (ULONG_PTR)GetHelpIDs());
-	return 0;
-}
-
-BOOL CCSDialog::OnInitDialog()
-{
-	CDialog::OnInitDialog();
-	ModifyStyleEx(0, WS_EX_CONTEXTHELP);
-	return TRUE;  // return TRUE unless you set the focus to a control
-				  // EXCEPTION: OCX Property Pages should return FALSE
-}
 
 /////////////////////////////////////////////////////////////////////////////
 // CCSPropertyPage
@@ -82,27 +55,8 @@ CCSPropertyPage::CCSPropertyPage(LPCTSTR lpszTemplateName,
 BEGIN_MESSAGE_MAP(CCSPropertyPage, CPropertyPage)
 	//{{AFX_MSG_MAP(CCSPropertyPage)
 	//}}AFX_MSG_MAP
-	ON_MESSAGE(WM_HELP, OnHelp)
-	ON_MESSAGE(WM_CONTEXTMENU, OnHelpContextMenu)
 END_MESSAGE_MAP()
 
-
-/////////////////////////////////////////////////////////////////////////////
-// CCSPropertyPage message handlers
-
-LONG_PTR CCSPropertyPage::OnHelp(UINT_PTR, LONG_PTR lParam)
-{
-	::WinHelp( (HWND)((LPHELPINFO)lParam)->hItemHandle, AfxGetApp()->m_pszHelpFilePath,
-		HELP_WM_HELP, (ULONG_PTR)GetHelpIDs());
-	return 0;
-}
-
-LONG_PTR CCSPropertyPage::OnHelpContextMenu(UINT_PTR wParam, LONG_PTR)
-{
-	::WinHelp((HWND)wParam, AfxGetApp()->m_pszHelpFilePath,
-		HELP_CONTEXTMENU, (ULONG_PTR)GetHelpIDs());
-	return 0;
-}
 
 /////////////////////////////////////////////////////////////////////////////
 // CCSPropertySheet
@@ -110,8 +64,6 @@ LONG_PTR CCSPropertyPage::OnHelpContextMenu(UINT_PTR wParam, LONG_PTR)
 BEGIN_MESSAGE_MAP(CCSPropertySheet, CPropertySheet)
 	//{{AFX_MSG_MAP(CCSPropertySheet)
 	//}}AFX_MSG_MAP
-	ON_MESSAGE(WM_HELP, OnHelp)
-	ON_MESSAGE(WM_CONTEXTMENU, OnHelpContextMenu)
 END_MESSAGE_MAP()
 
 CCSPropertySheet::CCSPropertySheet(UINT nIDCaption, CWnd *pParentWnd,
@@ -122,25 +74,4 @@ CCSPropertySheet::CCSPropertySheet(UINT nIDCaption, CWnd *pParentWnd,
 CCSPropertySheet::CCSPropertySheet(LPCTSTR pszCaption, CWnd *pParentWnd,
 	UINT iSelectPage) : CPropertySheet(pszCaption, pParentWnd, iSelectPage)
 {
-}
-
-/////////////////////////////////////////////////////////////////////////////
-// CCSPropertySheet message handlers
-
-LONG_PTR CCSPropertySheet::OnHelp(UINT_PTR wParam, LONG_PTR lParam)
-{
-	GetActivePage()->SendMessage(WM_HELP, wParam, lParam);
-	return 0;
-}
-
-LONG_PTR CCSPropertySheet::OnHelpContextMenu(UINT_PTR wParam, LONG_PTR lParam)
-{
-	GetActivePage()->SendMessage(WM_CONTEXTMENU, wParam, lParam);
-	return 0;
-}
-
-BOOL CCSPropertySheet::PreCreateWindow(CREATESTRUCT& cs)
-{
-	cs.dwExStyle |= WS_EX_CONTEXTHELP;
-	return CPropertySheet::PreCreateWindow(cs);
 }

@@ -20,10 +20,6 @@
 static char BASED_CODE THIS_FILE[] = __FILE__;
 #endif
 
-#ifndef DS_CONTEXTHELP
-#define DS_CONTEXTHELP 0x2000L
-#endif
-
 static const int nFontSize = 10;
 
 /////////////////////////////////////////////////////////////////////////////
@@ -172,8 +168,6 @@ void CButtonDialog::FillInHeader(LPDLGTEMPLATE lpDlgTmp)
 	USES_CONVERSION;
 	lpDlgTmp->style = DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_VISIBLE |
 		WS_CAPTION | WS_SYSMENU;
-	if (theApp.m_bWin4)
-		lpDlgTmp->style |= DS_CONTEXTHELP;
 	lpDlgTmp->dwExtendedStyle = 0;
 	lpDlgTmp->cdit = 0;
 	lpDlgTmp->x = 0;

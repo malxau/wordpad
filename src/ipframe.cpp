@@ -32,9 +32,7 @@ BEGIN_MESSAGE_MAP(CInPlaceFrame, COleIPFrameWnd)
 	//{{AFX_MSG_MAP(CInPlaceFrame)
 	ON_WM_CREATE()
 	ON_WM_DESTROY()
-	ON_COMMAND(ID_HELP, OnHelpFinder)
 	ON_COMMAND(ID_CHAR_COLOR, OnCharColor)
-	ON_COMMAND(ID_HELP_INDEX, OnHelpFinder)
 	ON_COMMAND(ID_PEN_TOGGLE, OnPenToggle)
 	//}}AFX_MSG_MAP
 	ON_UPDATE_COMMAND_UI(ID_VIEW_TOOLBAR, OnUpdateControlBarMenu)
@@ -45,8 +43,6 @@ BEGIN_MESSAGE_MAP(CInPlaceFrame, COleIPFrameWnd)
 	ON_COMMAND_EX(ID_VIEW_RULER, OnBarCheck)
 	ON_MESSAGE(WM_SIZECHILD, OnResizeChild)
 	ON_MESSAGE(WPM_BARSTATE, OnBarState)
-	ON_COMMAND(ID_DEFAULT_HELP, OnHelpFinder)
-//  ON_COMMAND(ID_CONTEXT_HELP, COleIPFrameWnd::OnContextHelp)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -342,11 +338,6 @@ LONG_PTR CInPlaceFrame::OnBarState(UINT_PTR wParam, LONG_PTR lParam)
 		m_pMainFrame->SetDockState(theApp.GetDockState(RD_EMBEDDED, FALSE));
 	}
 	return 0L;
-}
-
-void CInPlaceFrame::OnHelpFinder()
-{
-	theApp.WinHelp(0, HELP_FINDER);
 }
 
 void CInPlaceFrame::OnCharColor()
