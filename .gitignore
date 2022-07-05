@@ -1,0 +1,11 @@
+**/*.cab
+**/*.exe
+**/*.exp
+**/*.lib
+**/*.obj
+**/*.pdb
+**/*.pch
+**/*.pru
+**/*.res
+pkg/out/**
+src/Release/**
