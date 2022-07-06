@@ -1,0 +1,8 @@
+setlocal
+set PKGNAME=%1%
+set PKGARCH=%2%
+set VERSION=%3%
+initool -w out\pkglist.ini Provides %PKGNAME% %VERSION%
+initool -w out\pkglist.ini %PKGNAME% Version %VERSION%
+initool -w out\pkglist.ini %PKGNAME% %PKGARCH% %PKGNAME%-%PKGARCH%.cab
+endlocal

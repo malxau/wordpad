@@ -1,0 +1,50 @@
+setlocal
+
+REM
+REM Determine architecture by looking at compiler output.
+REM
+
+set ARCH=win32
+cl /? 2>&1 | findstr /C:"for x64" >NUL 2>&1
+if intcmp %ERRORLEVEL%==0;set ARCH=amd64
+cl /? 2>&1 | findstr /C:"for AMD64" >NUL 2>&1
+if intcmp %ERRORLEVEL%==0;set ARCH=amd64
+cl /? 2>&1 | findstr /C:"for ARM" >NUL 2>&1
+if intcmp %ERRORLEVEL%==0;set ARCH=arm
+cl /? 2>&1 | findstr /C:"for ARM64" >NUL 2>&1
+if intcmp %ERRORLEVEL%==0;set ARCH=arm64
+cl /? 2>&1 | findstr /C:"for MIPS" >NUL 2>&1
+if intcmp %ERRORLEVEL%==0;set ARCH=mips
+cl /? 2>&1 | findstr /C:"for Itanium" >NUL 2>&1
+if intcmp %ERRORLEVEL%==0;set ARCH=ia64
+
+REM 
+REM Set build ID.
+REM
+
+set VERSION=`date`
+
+echo *** Cleaning tree
+pushd ..\src
+ymake clean >NUL
+popd
+
+echo *** Building %ARCH% retail
+ymake -f ..\src\Makefile -m 
+if intcmp %ERRORLEVEL%!=0; goto exit
+
+echo *** Packaging %ARCH% retail
+ymake -f Makefile VERSION=%VERSION%
+
+REM
+REM Generate pkglist.ini so that tools can find packages provided by this
+REM directory
+REM
+
+bld-pkglist wordpad %ARCH% %VERSION%
+bld-pkglist wordpad-pdb %ARCH% %VERSION%
+bld-pkglist wordpad-source noarch %VERSION%
+
+:exit
+
+endlocal
