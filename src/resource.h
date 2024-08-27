@@ -206,7 +206,9 @@
 #define ID_PEN_SPACE                    32808
 #define ID_PEN_BACKSPACE                32809
 #define ID_PEN_NEWLINE                  32810
+#ifndef ID_OLE_VERB_POPUP
 #define ID_OLE_VERB_POPUP               32811
+#endif
 #define ID_PEN_TOGGLE                   32812
 #define ID_PEN_LENS                     32813
 #define ID_PEN_TAB                      32814

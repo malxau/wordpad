@@ -16,6 +16,22 @@
 #define VC_EXTRALEAN        // use stripped down Win32 headers
 #endif
 
+#ifdef _MSC_VER
+#if _MSC_VER >= 1700
+#define WINVER 0x601
+#elif _MSC_VER >= 1600
+#define WINVER 0x501
+#elif _MSC_VER >= 1500
+#define WINVER 0x500
+#else
+#define WINVER 0x400
+#endif
+
+#if _MSC_VER >= 1600
+#pragma warning(disable: 4996) // Function declared deprecated
+#endif
+#endif
+
 #define CONVERTERS
 
 #include <afxwin.h>         // MFC core and standard components

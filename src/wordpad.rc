@@ -1,16 +1,5 @@
-// Microsoft Visual C++ generated resource script.
-//
-#include "resource.h"
-
-#define APSTUDIO_READONLY_SYMBOLS
-/////////////////////////////////////////////////////////////////////////////
-//
-// Generated from the TEXTINCLUDE 2 resource.
-//
 #include "afxres.h"
-
-/////////////////////////////////////////////////////////////////////////////
-#undef APSTUDIO_READONLY_SYMBOLS
+#include "resource.h"
 
 /////////////////////////////////////////////////////////////////////////////
 // English (U.S.) resources
@@ -20,37 +9,6 @@
 LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 #pragma code_page(1252)
 #endif //_WIN32
-
-#ifdef APSTUDIO_INVOKED
-/////////////////////////////////////////////////////////////////////////////
-//
-// TEXTINCLUDE
-//
-
-1 TEXTINCLUDE 
-BEGIN
-    "resource.h\0"
-END
-
-2 TEXTINCLUDE 
-BEGIN
-    "#include ""afxres.h""\r\n"
-    "\0"
-END
-
-3 TEXTINCLUDE 
-BEGIN
-    "#include ""res\\wordpad.rc2""  // non-App Studio edited resources\r\n"
-    "\r\n"
-    "#include ""afxres.rc""  \t// Standard components\r\n"
-    "#include ""afxprint.rc""\t// printing/print preview resources\r\n"
-    "#include ""afxolecl.rc""\t// OLE container resources\r\n"
-    "#include ""afxolesv.rc""\t// OLE server resources\r\n"
-    "\0"
-END
-
-#endif    // APSTUDIO_INVOKED
-
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -987,7 +945,6 @@ END
 
 
 
-#ifndef APSTUDIO_INVOKED
 /////////////////////////////////////////////////////////////////////////////
 //
 // Generated from the TEXTINCLUDE 3 resource.
@@ -1000,5 +957,4 @@ END
 #include "afxolesv.rc"	// OLE server resources
 
 /////////////////////////////////////////////////////////////////////////////
-#endif    // not APSTUDIO_INVOKED
 
