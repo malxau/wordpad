@@ -37,7 +37,7 @@ public:
 
 // Overridables
 	virtual BOOL OnCommand(WPARAM wParam, LPARAM lParam);
-	virtual INT_PTR DoModal();
+	virtual WP_INT_PTR DoModal();
 
 // Implementation
 protected:

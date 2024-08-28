@@ -106,7 +106,7 @@ void CFormatBar::SyncToView()
 	USES_CONVERSION;
 	// get the current font from the view and update
 	CHARHDR fh;
-	CHARFORMAT& cf = fh.cf;
+	WP_CHARFORMAT& cf = fh.cf;
 	fh.hwndFrom = m_hWnd;
 	fh.idFrom = GetDlgCtrlID();
 	fh.code = FN_GETFORMAT;
@@ -195,14 +195,14 @@ void CFormatBar::OnFontNameKillFocus()
 			CFontDesc* pDesc = (CFontDesc*)m_comboFontName.GetItemData(nIndex);
 			ENSURE(pDesc != NULL);
 			ASSERT(pDesc->m_strName.GetLength() < LF_FACESIZE);
-			_tcsncpy_s(cf.szFaceName, LF_FACESIZE, pDesc->m_strName, _TRUNCATE);
+			_tcscpy(cf.szFaceName, pDesc->m_strName);
 			cf.bCharSet = pDesc->m_nCharSet;
 			cf.bPitchAndFamily = pDesc->m_nPitchAndFamily;
 		}
 		else // unknown font
 		{
 			ASSERT(str.GetLength() < LF_FACESIZE);
-			_tcsncpy_s(cf.szFaceName, LF_FACESIZE, str, _TRUNCATE);
+			_tcscpy(cf.szFaceName, str);
 			cf.bCharSet = DEFAULT_CHARSET;
 			cf.bPitchAndFamily = DEFAULT_PITCH | FF_DONTCARE;
 		}
@@ -611,9 +611,9 @@ void CSizeComboBox::TwipsToPointString(LPTSTR lpszBuf, int nTwips)
 		// round to nearest half point
 		nTwips = (nTwips+5)/10;
 		if ((nTwips%2) == 0)
-			_stprintf_s(lpszBuf, 10, _T("%ld"), nTwips/2);
+			_stprintf(lpszBuf, _T("%ld"), nTwips/2);
 		else
-			_stprintf_s(lpszBuf, 10, _T("%.1f"), (float)nTwips/2.F);
+			_stprintf(lpszBuf, _T("%.1f"), (float)nTwips/2.F);
 	}
 }
 
@@ -671,7 +671,7 @@ BOOL CALLBACK AFX_EXPORT CSizeComboBox::EnumSizeCallBack(LOGFONT FAR* /*lplf*/,
 
 		for (int i = 0; i < 16; i++)
 		{
-			_stprintf_s(buf, 10, _T("%d"), nFontSizes[i]);
+			_stprintf(buf, _T("%d"), nFontSizes[i]);
 			pThis->AddString(buf);
 		}
 		return FALSE; // don't call me again

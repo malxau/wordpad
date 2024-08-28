@@ -16,9 +16,9 @@ class CFormatTabDlg : public CCSDialog
 {
 // Construction
 public:
-	CFormatTabDlg(PARAFORMAT2& pf, CWnd* pParent = NULL);    // standard constructor
+	CFormatTabDlg(WP_PARAFORMAT& pf, CWnd* pParent = NULL);    // standard constructor
 	~CFormatTabDlg();
-	PARAFORMAT2 m_pf;
+	WP_PARAFORMAT m_pf;
 	LONG* m_tabarray;
 	int m_nCount;
 

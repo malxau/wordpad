@@ -425,7 +425,13 @@ UINT CConverter::Read(void FAR* lpBuf, UINT nCount)
 			WaitForConverter();
 			VERIFY(ResetEvent(m_hEventFile));
 			if (m_bConvErr)
+			{
+#if _MFC_VER >= 0x700
 				AfxThrowFileException(CFileException::genericException);
+#else
+				AfxThrowFileException(CFileException::generic);
+#endif
+			}
 			if (m_bDone)
 				return nCount - cch;
 			m_pBuf = (BYTE*)GlobalLock(m_hBuff);
@@ -452,12 +458,18 @@ void CConverter::Write(const void FAR* lpBuf, UINT nCount)
 		WaitForConverter();
 		VERIFY(ResetEvent(m_hEventFile));
 		if (m_bConvErr)
+		{
+#if _MFC_VER >= 0x700
 			AfxThrowFileException(CFileException::genericException);
+#else
+			AfxThrowFileException(CFileException::generic);
+#endif
+		}
 		m_nBytesAvail = min(nCount, BUFFSIZE);
 		nCount -= m_nBytesAvail;
 		BYTE* pBuf = (BYTE*)GlobalLock(m_hBuff);
 		ASSERT(pBuf != NULL);
-		memcpy_s(pBuf, nCount, lpBuf, m_nBytesAvail);
+		memcpy(pBuf, lpBuf, m_nBytesAvail);
 		GlobalUnlock(m_hBuff);
 		SetEvent(m_hEventConv);
 	}
@@ -471,7 +483,7 @@ ULONGLONG CConverter::Seek(LONGLONG lOff, UINT nFrom)
 	return 0;
 }
 
-ULONGLONG CConverter::GetPosition() const
+WP_FILE_SIZE CConverter::GetPosition() const
 {
 	return 0;
 }
@@ -488,7 +500,7 @@ void CConverter::Abort()
 {
 }
 
-ULONGLONG CConverter::GetLength() const
+WP_FILE_SIZE CConverter::GetLength() const
 {
 	ASSERT_VALID(this);
 	return 1;
@@ -513,3 +525,5 @@ void CConverter::SetLength(ULONGLONG)
 {
 	AfxThrowNotSupportedException();
 }
+
+// vim:sw=4:ts=4:noet:

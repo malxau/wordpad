@@ -120,7 +120,11 @@ void CWordPadDoc::ReportSaveLoadException(LPCTSTR lpszPathName,
 				break;
 			case CFileException::lockViolation:
 			case CFileException::badSeek:
+#if _MFC_VER >= 0x700
 			case CFileException::genericException:
+#else
+			case CFileException::generic:
+#endif
 			case CFileException::invalidFile:
 			case CFileException::hardIO:
 				nIDP = bSaving ? AFX_IDP_FAILED_IO_ERROR_WRITE :

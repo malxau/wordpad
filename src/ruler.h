@@ -107,7 +107,7 @@ public:
 public:
 	virtual BOOL Create(CWnd* pParentWnd, DWORD dwStyle, UINT nID);
 protected:
-	void Update(const PARAFORMAT& pf);
+	void Update(const WP_PARAFORMAT& pf);
 	void Update(CSize sizePaper, const CRect& rectMargins);
 
 // Attributes
@@ -169,7 +169,7 @@ protected:
 	void DrawNumbers(CDC& dc, int nInc, int nTPU);
 	void DrawDiv(CDC& dc, int nInc, int nLargeDiv, int nLength);
 	void DrawTabs(CDC& dc);
-	void FillInParaFormat(PARAFORMAT& pf);
+	void FillInParaFormat(WP_PARAFORMAT& pf);
 	void SortTabs();
 	void SetMarginBounds();
 	CRulerItem* GetFreeTab();

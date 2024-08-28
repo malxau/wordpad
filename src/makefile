@@ -17,7 +17,7 @@ CXX_RUNTIME=/MT
 RC_RUNTIME=
 !ENDIF
 
-CXXFLAGS=/Zc:wchar_t /nologo /W3 /EHsc /Os /Z7 $(CXX_RUNTIME) /D "NDEBUG" /D "WIN32" /D "_WINDOWS" /D "_UNICODE" /Fp"$(INTDIR)\wordpad.pch" /Fo"$(INTDIR)\\" /c 
+CXXFLAGS=/nologo /W3 /EHsc /Os /Z7 $(CXX_RUNTIME) /D "NDEBUG" /D "WIN32" /D "_WINDOWS" /D "_UNICODE" /Fp"$(INTDIR)\wordpad.pch" /Fo"$(INTDIR)\\" /c 
 RCFLAGS=/l 0x409 /fo"$(INTDIR)\wordpad.res" /d "NDEBUG" $(RC_RUNTIME)
 
 LDFLAGS=/nologo /entry:"wWinMainCRTStartup" /subsystem:windows /incremental:no /debug /pdb:"$(OUTDIR)\wordpad.pdb" /out:"$(OUTDIR)\wordpad.exe" 

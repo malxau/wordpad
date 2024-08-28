@@ -198,7 +198,11 @@ BOOL CWordPadApp::InitInstance()
 	RegisterFormats();
 
 	// Initialize RichEdit control
+#if _MFC_VER >= 0x700
 	if (!AfxInitRichEdit2())
+#else
+	if (!AfxInitRichEdit())
+#endif
 	{
 		AfxMessageBox(IDS_RICHED_LOAD_FAIL, MB_OK|MB_ICONEXCLAMATION);
 		return FALSE;
@@ -384,8 +388,11 @@ void CWordPadApp::LoadOptions()
 
 	if (GetProfileBinary(szSection, szFrameRect, &pb, &nLen))
 	{
-		ASSERT(nLen == sizeof(CRect));
-		memcpy_s(&m_rectInitialFrame, nLen, pb, sizeof(CRect));
+		if (nLen >= sizeof(CRect))
+		{
+			ASSERT(nLen == sizeof(CRect));
+			memcpy(&m_rectInitialFrame, pb, sizeof(CRect));
+		}
 		delete pb;
 	}
 	else
@@ -400,8 +407,11 @@ void CWordPadApp::LoadOptions()
 
 	if (GetProfileBinary(szSection, szPageMargin, &pb, &nLen))
 	{
-		ASSERT(nLen == sizeof(CRect));
-		memcpy_s(&m_rectPageMargin, nLen, pb, sizeof(CRect));
+		if (nLen >= sizeof(CRect))
+		{
+			ASSERT(nLen == sizeof(CRect));
+			memcpy(&m_rectPageMargin, pb, sizeof(CRect));
+		}
 		delete pb;
 	}
 	else
@@ -756,7 +766,7 @@ void CWordPadApp::UpdateRegistry()
 	::GetShortPathName(szLongPathName, szShortPathName, _MAX_PATH);
 
 	LPCTSTR rglpszSymbols[NUM_REG_ARGS];
-	rglpszSymbols[0] = COLE2CT(lpszClassID);
+	rglpszSymbols[0] = OLE2CT(lpszClassID);
 	rglpszSymbols[1] = strServerName;
 	rglpszSymbols[2] = szShortPathName;
 	rglpszSymbols[3] = strLocalShortName;
@@ -894,3 +904,5 @@ HGLOBAL CWordPadApp::CreateDevNames()
 	}
 	return hDev;
 }
+
+// vim:sw=4:ts=4:noet:

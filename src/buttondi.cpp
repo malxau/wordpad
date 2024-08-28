@@ -63,7 +63,7 @@ CButtonDialog::CButtonDialog(LPCTSTR lpszText, LPCTSTR lpszCaption,
 	m_hDlgTmp = NULL;
 
 	LOGFONT lf;
-	memcpy_s(&lf, sizeof(LOGFONT), &theApp.m_lf, sizeof(LOGFONT));
+	memcpy(&lf, &theApp.m_lf, sizeof(LOGFONT));
 	lf.lfHeight = -nFontSize;
 	lf.lfWidth = 0;
 	lf.lfWeight = FW_NORMAL;
@@ -181,7 +181,7 @@ void CButtonDialog::FillInHeader(LPDLGTEMPLATE lpDlgTmp)
 	*lpStr++ = 0;  /* No Class name for MessageBox */
 
 	int nLen = m_strCaption.GetLength();
-	wcscpy_s(lpStr, sizeof(DLGTEMPLATE), CT2CW(m_strCaption));
+	wcscpy(lpStr, T2CW(m_strCaption));
 
 	lpStr += nLen+1;
 	WORD* pWord = (WORD*)lpStr;
@@ -189,7 +189,7 @@ void CButtonDialog::FillInHeader(LPDLGTEMPLATE lpDlgTmp)
 	pWord++;
 	lpStr = (LPWSTR) pWord;
 
-	wcscpy_s(lpStr, sizeof(DLGTEMPLATE),CT2W(theApp.m_lf.lfFaceName));
+	wcscpy(lpStr, T2W(theApp.m_lf.lfFaceName));
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -208,7 +208,7 @@ BOOL CButtonDialog::OnCommand(WPARAM wParam, LPARAM /*lParam*/)
 	return TRUE;
 }
 
-INT_PTR CButtonDialog::DoModal()
+WP_INT_PTR CButtonDialog::DoModal()
 {
 	ASSERT(m_strArray.GetSize() != 0);
 	if (m_strArray.GetSize() == 0)

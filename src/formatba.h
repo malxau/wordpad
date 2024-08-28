@@ -25,8 +25,8 @@ typedef struct tagNMHDR
 
 struct CHARHDR : public tagNMHDR
 {
-	CHARFORMAT2 cf;
-	CHARHDR() {cf.cbSize = sizeof(CHARFORMAT2);}
+	WP_CHARFORMAT cf;
+	CHARHDR() {cf.cbSize = sizeof(WP_CHARFORMAT);}
 };
 
 #define FN_SETFORMAT    0x1000

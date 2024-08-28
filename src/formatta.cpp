@@ -33,7 +33,7 @@ const DWORD CFormatTabDlg::m_nHelpIDs[] =
 /////////////////////////////////////////////////////////////////////////////
 // CFormatTabDlg dialog
 
-CFormatTabDlg::CFormatTabDlg(PARAFORMAT2& pf, CWnd* pParent /*=NULL*/)
+CFormatTabDlg::CFormatTabDlg(WP_PARAFORMAT& pf, CWnd* pParent /*=NULL*/)
 	: CCSDialog(CFormatTabDlg::IDD, pParent)
 {
 	m_pf = pf;
@@ -166,7 +166,7 @@ BOOL CFormatTabDlg::RemoveTabFromArray(LONG lTab)
 
 void CFormatTabDlg::RemoveTabFromArrayByIndex(int nIndex)
 {
-	memmove_s(&m_tabarray[nIndex], sizeof(LONG), &m_tabarray[nIndex+1],
+	memmove(&m_tabarray[nIndex], &m_tabarray[nIndex+1],
 		(m_nCount-nIndex-1)*sizeof(LONG));
 	m_nCount--;
 }

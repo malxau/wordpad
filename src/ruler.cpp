@@ -316,7 +316,7 @@ CRulerBar::CRulerBar(BOOL b3DExt) :
 	m_nScroll = 0;
 
 	LOGFONT lf;
-	memcpy_s(&lf, sizeof(LOGFONT), &theApp.m_lf, sizeof(LOGFONT));
+	memcpy(&lf, &theApp.m_lf, sizeof(LOGFONT));
 	lf.lfHeight = -8;
 	lf.lfWidth = 0;
 	VERIFY(fnt.CreateFontIndirect(&lf));
@@ -459,7 +459,7 @@ CSize CRulerBar::CalcFixedLayout(BOOL bStretch, BOOL bHorz)
 	return m_size;
 }
 
-void CRulerBar::Update(const PARAFORMAT& pf)
+void CRulerBar::Update(const WP_PARAFORMAT& pf)
 {
 	ASSERT(pf.cTabCount <= MAX_TAB_STOPS);
 
@@ -489,7 +489,7 @@ void CRulerBar::Update(CSize sizePaper, const CRect& rectMargins)
 	}
 }
 
-void CRulerBar::FillInParaFormat(PARAFORMAT& pf)
+void CRulerBar::FillInParaFormat(WP_PARAFORMAT& pf)
 {
 	pf.dwMask = PFM_STARTINDENT | PFM_RIGHTINDENT | PFM_OFFSET | PFM_TABSTOPS;
 	pf.dxStartIndent = m_indent.GetHorzPosTwips();
@@ -686,7 +686,7 @@ void CRulerBar::DrawNumbers(CDC& dc, int nInc, int nTPU)
 		if (nTwips == nPageWidth)
 			continue;
 		nPixel = XTwipsToRuler(nTwips);
-		_stprintf_s(buf, 10, _T("%d"), nTwips/nTPU);
+		_stprintf(buf, _T("%d"), nTwips/nTPU);
 		nLen = lstrlen(buf);
 		CSize sz = dc.GetTextExtent(buf, nLen);
 		dc.ExtTextOut(nPixel - sz.cx/2, HEIGHT/2 - sz.cy/2, 0, NULL, buf, nLen, NULL);
@@ -781,7 +781,7 @@ void CRulerBar::OnLButtonUp(UINT nFlags, CPoint point)
 	ReleaseCapture();
 	CWordPadView* pView = (CWordPadView*)GetView();
 	ENSURE(pView != NULL);
-	PARAFORMAT2& pf = pView->GetParaFormatSelection();
+	WP_PARAFORMAT& pf = pView->GetParaFormatSelection();
 	FillInParaFormat(pf);
 	pView->SetParaFormat(pf);
 	m_pSelItem = NULL;

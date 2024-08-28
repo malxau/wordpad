@@ -16,8 +16,8 @@ class CFormatParaDlg : public CCSDialog
 {
 // Construction
 public:
-	CFormatParaDlg(PARAFORMAT2& pf, CWnd* pParent = NULL);   // standard constructor
-	PARAFORMAT2 m_pf;
+	CFormatParaDlg(WP_PARAFORMAT& pf, CWnd* pParent = NULL);   // standard constructor
+	WP_PARAFORMAT m_pf;
 
 // Attributes
 	int m_nWordWrap;

@@ -88,12 +88,12 @@ static BOOL IsWord6(LPCTSTR pszPathName)
 	BOOL bRes = FALSE;
 	// see who created it
 	LPSTORAGE lpStorage;
-	SCODE sc = StgOpenStorage(CT2COLE(pszPathName), NULL,
+	SCODE sc = StgOpenStorage(T2COLE(pszPathName), NULL,
 		STGM_READ|STGM_SHARE_EXCLUSIVE, 0, 0, &lpStorage);
 	if (sc == NOERROR)
 	{
 		LPSTREAM lpStream;
-		sc = lpStorage->OpenStream(CT2COLE(szSumInfo), NULL,
+		sc = lpStorage->OpenStream(T2COLE(szSumInfo), NULL,
 			STGM_READ|STGM_SHARE_EXCLUSIVE, NULL, &lpStream);
 		if (sc == NOERROR)
 		{
@@ -121,10 +121,14 @@ int GetDocTypeFromName(LPCTSTR pszPathName, CFileException& fe)
 		CString ext = CString(pszPathName).Right(4);
 		if (ext[0] != '.')
 			return RD_TEXT;
+#if defined(_MSC_VER) && _MSC_VER >= 1400
 #pragma warning(suppress:6400)
+#endif
 		if (lstrcmpi(ext, _T(".doc"))==0)
 			return RD_WORDPAD;
+#if defined(_MSC_VER) && _MSC_VER >= 1400
 #pragma warning(suppress:6400)
+#endif
 		if (lstrcmpi(ext, _T(".rtf"))==0)
 			return RD_RICHTEXT;
 		return RD_TEXT;

@@ -70,7 +70,7 @@ public:
 	int m_nPercent;
 	BOOL m_bDone;
 	BOOL m_bConvErr;
-	virtual ULONGLONG GetPosition() const;
+	virtual WP_FILE_SIZE GetPosition() const;
 
 // Operations
 	BOOL IsFormatCorrect(LPCTSTR pszFileName);
@@ -82,7 +82,7 @@ public:
 
 // Overridables
 	virtual ULONGLONG Seek(LONGLONG lOff, UINT nFrom);
-	virtual ULONGLONG GetLength() const;
+	virtual WP_FILE_SIZE GetLength() const;
 
 	virtual UINT Read(void* lpBuf, UINT nCount);
 	virtual void Write(const void* lpBuf, UINT nCount);
